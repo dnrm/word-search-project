@@ -1,8 +1,36 @@
 import random
-end_color = '\033[0m'
+
+end_color = "\033[0m"
+
+
+def random_color_highlight():
+    return f"\033[{random.randint(101, 105)}m"
 
 def random_color():
-    return f"\033[{random.randint(101, 105)}m"
+    return f"\033[{random.randint(91, 96)}m"
+
+
+def prompt_wordlist():
+    print("Which wordlilst would you like to use?")
+    print(f"\033[92m1. Fruit{end_color}")
+    print(f"\033[92m2. Programming Languages{end_color}")
+    print(f"\033[92m3. Animals{end_color}")
+    print(f"\033[92m4. Tec de Monterrey Edition{end_color}")
+    print(f"\033[92m5. Cities Around the World{end_color}")
+
+    wordlist_selection = 0
+    wordlist_selection = input(
+        "Enter the number of the wordlist you would like to use (default 1): "
+    )
+
+    while wordlist_selection < "1" or wordlist_selection > "5":
+        print(f"\033[91m❌ Invalid option{end_color}")
+        wordlist_selection = input(
+            "Enter the number of the wordlist you would like to use (default 1): "
+        )
+
+    return wordlist_selection
+
 
 def print_board(board):
     print("  ", end=" ")
@@ -100,12 +128,18 @@ def fill_remainig_spaces(board):
                 board[i][j] = chr(random.randint(97, 122))
     return board
 
+
 def mark_in_board(word, coordinate, direction, board):
-    color = random_color()
+    color = random_color_highlight()
     if direction == 0:
         for i in range(len(word)):
-            board[coordinate[0]][coordinate[1] + i] = f"{color}{board[coordinate[0]][coordinate[1] + i].upper()}{end_color}"
+            board[coordinate[0]][
+                coordinate[1] + i
+            ] = f"{color}{board[coordinate[0]][coordinate[1] + i].upper()}{end_color}"
+            print(f"{coordinate[0]} {coordinate[1] + i}")
     else:
         for i in range(len(word)):
-            board[coordinate[0] + i][coordinate[1]] = f"{color}{board[coordinate[0] + i][coordinate[1]].upper()}{end_color}"
+            board[coordinate[0] + i][
+                coordinate[1]
+            ] = f"{color}{board[coordinate[0] + i][coordinate[1]].upper()}{end_color}"
     return board

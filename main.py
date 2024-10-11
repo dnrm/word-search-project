@@ -1,14 +1,21 @@
+# Written by Daniel Medina
+# Date: 2024-10-11
+
+# ? Possible additions: Include a timer with a cloud-based leaderboard to track the fastest times
+# ? Possible additions: Include a GUI for the game
+
 import os
-from word_list import words
+import word_list
 from utils import (
     fill_board_with_words,
     fill_remainig_spaces,
     print_board,
-    mark_in_board
+    mark_in_board,
+    prompt_wordlist,
 )
 import time
 
-end_color = '\033[0m'
+end_color = "\033[0m"
 
 def main():
     os.system("cls||clear")
@@ -22,6 +29,11 @@ def main():
         print(f"\033[91m❌ Board size must be at least 5 {end_color}")
         board_size = int(input("Enter the size of the board (default: 5): "))
 
+    # * Prompt user to select a wordlist
+    wordlist = prompt_wordlist()
+    words = word_list.words[int(wordlist)]
+
+    # * Create the board and fill it with words
     board = [["" for _ in range(board_size)] for _ in range(board_size)]
     board, words_in_board = fill_board_with_words(board, words)
     board = fill_remainig_spaces(board)
@@ -34,21 +46,18 @@ def main():
     for i in words_in_board:
         print(f"{i['word']} is at {i['coord']} in direction {i['direction']}")
 
-    # * Next steps are to allow user to input the coordinates of the word they've found and check if it's correct and in the words_in_board list
-    # * If it is, then the word will be marked as found and the board will be printed again
-    # * If all words are found, then the game will end
+    start_time = time.time()
 
-    # ? Possible additions: Include a timer with a cloud-based leaderboard to track the fastest times
-    # ? Possible additions: Include a GUI for the game
-
-
+    # * Game loop
     while not all([i["found"] for i in words_in_board]):
         os.system("cls||clear")
         print("===== WORD SEARCH =====")
         print_board(board)
+
+        # * Display words found and not found
+        print("Words found:")
         for i in words_in_board:
             if not i["found"]:
-                # print(f"\033[92m{i['word']} is at {i['coord']} in direction {i['direction']}{end_color}")
                 print(f"\033[91m{i['word']}{end_color}")
             else:
                 print(f"\033[92m{i['word']}{end_color}")
@@ -60,17 +69,20 @@ def main():
 
         for i in words_in_board:
             if i["word"] == guess:
-                print(f"\033[92m✅ {guess} found at {i['coord']} in direction {i['direction']} \033[0m")
+                print(
+                    f"\033[92m✅ {guess} found at {i['coord']} in direction {i['direction']} \033[0m"
+                )
                 time.sleep(1)
                 mark_in_board(i["word"], i["coord"], i["direction"], board)
                 i["found"] = True
                 break
-        
+
     os.system("cls||clear")
     print("===== WORD SEARCH =====")
     print_board(board)
 
     print("\033[92m🎉🎉🎉 Congratulations! You found all the words! 🎉🎉🎉\033[0m")
+    print("You took \033[96m{:.2f}\033[0m seconds to complete the game".format(time.time() - start_time))
 
 
 if __name__ == "__main__":
