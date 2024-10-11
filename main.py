@@ -4,6 +4,7 @@ from utils import (
     fill_board_with_words,
     fill_remainig_spaces,
     print_board,
+    mark_in_board
 )
 import time
 
@@ -54,12 +55,14 @@ def main():
 
         guess = input("Enter the word you found: ").lower()
         while guess not in words:
+            print(f"\033[91m❌ Try again.{end_color}")
             guess = input("Enter the word you found: ").lower()
 
         for i in words_in_board:
             if i["word"] == guess:
                 print(f"\033[92m✅ {guess} found at {i['coord']} in direction {i['direction']} \033[0m")
-                time.sleep(1.2)
+                time.sleep(1)
+                mark_in_board(i["word"], i["coord"], i["direction"], board)
                 i["found"] = True
                 break
         

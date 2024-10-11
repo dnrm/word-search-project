@@ -1,14 +1,17 @@
 import random
+end_color = '\033[0m'
 
+def random_color():
+    return f"\033[{random.randint(101, 105)}m"
 
 def print_board(board):
     print("  ", end=" ")
     for i in range(len(board)):
-        print(i, end="  ")
+        print(f"\033[36m{i}{end_color}", end="  ")
     print()
     index = 0
     for i in board:
-        print(index, end="  ")
+        print(f"\033[36m{index}{end_color}", end="  ")
         for j in i:
             print(j, end="  ")
         print()
@@ -95,4 +98,14 @@ def fill_remainig_spaces(board):
             if board[i][j] == "":
                 # * Fill with lowercase letters
                 board[i][j] = chr(random.randint(97, 122))
+    return board
+
+def mark_in_board(word, coordinate, direction, board):
+    color = random_color()
+    if direction == 0:
+        for i in range(len(word)):
+            board[coordinate[0]][coordinate[1] + i] = f"{color}{board[coordinate[0]][coordinate[1] + i].upper()}{end_color}"
+    else:
+        for i in range(len(word)):
+            board[coordinate[0] + i][coordinate[1]] = f"{color}{board[coordinate[0] + i][coordinate[1]].upper()}{end_color}"
     return board
