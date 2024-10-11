@@ -58,17 +58,27 @@ def fill_board_with_words(board, words):
         direction = random.randint(0, 1)
 
         # * 0: Horizontal | 1: Vertical
-        if direction == 0:
+        if direction == 0 and word not in [i["word"] for i in words_in_board]:
             if fits_horizontally(board, word, coord):
                 words_in_board.append(
-                    {"coord": coord, "word": word, "direction": direction}
+                    {
+                        "coord": coord,
+                        "word": word,
+                        "direction": direction,
+                        "found": False,
+                    }
                 )
                 for j in range(len(word)):
                     board[coord[0]][coord[1] + j] = word[j]
-        elif direction == 1:
+        elif direction == 1 and word not in [i["word"] for i in words_in_board]:
             if fits_vertically(board, word, coord):
                 words_in_board.append(
-                    {"coord": coord, "word": word, "direction": direction}
+                    {
+                        "coord": coord,
+                        "word": word,
+                        "direction": direction,
+                        "found": False,
+                    }
                 )
                 for j in range(len(word)):
                     board[coord[0] + j][coord[1]] = word[j]
@@ -76,7 +86,6 @@ def fill_board_with_words(board, words):
             print("Word does not fit in the board")
             continue
 
-    print(words_in_board)
     return board, words_in_board
 
 
