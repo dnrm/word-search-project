@@ -1,7 +1,6 @@
 # Written by Daniel Medina
 # Date: 2024-10-11
 
-# ? Possible additions: Include a timer with a cloud-based leaderboard to track the fastest times
 # ? Possible additions: Include a GUI for the game
 
 import os
