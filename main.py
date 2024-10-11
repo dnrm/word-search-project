@@ -16,6 +16,7 @@ import time
 
 end_color = "\033[0m"
 
+
 def main():
     os.system("cls||clear")
     print("===== WORD SEARCH =====")
@@ -62,16 +63,20 @@ def main():
                 print(f"\033[92m{i['word']}{end_color}")
 
         guess = input("Enter the word you found: ").lower()
+        coords = input("Enter the position of the first letter (example: 1,2): ").lower()
+
+        # TODO Missing to validate that coords are the correct value
+        coords = coords.split(",")
+        print("coords", coords)
+
         while guess not in words:
             print(f"\033[91m❌ Try again.{end_color}")
             guess = input("Enter the word you found: ").lower()
 
         for i in words_in_board:
             if i["word"] == guess:
-                print(
-                    f"\033[92m✅ {guess} found at {i['coord']} in direction {i['direction']} \033[0m"
-                )
-                time.sleep(1)
+                print(f"\033[92m✅ {guess} found at {i['coord']}\033[0m")
+                time.sleep(0.75)
                 mark_in_board(i["word"], i["coord"], i["direction"], board)
                 i["found"] = True
                 break
@@ -81,7 +86,11 @@ def main():
     print_board(board)
 
     print("\033[92m🎉🎉🎉 Congratulations! You found all the words! 🎉🎉🎉\033[0m")
-    print("You took \033[96m{:.2f}\033[0m seconds to complete the game".format(time.time() - start_time))
+    print(
+        "You took \033[96m{:.2f}\033[0m seconds to complete the game".format(
+            time.time() - start_time
+        )
+    )
 
 
 if __name__ == "__main__":
