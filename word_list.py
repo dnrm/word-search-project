@@ -107,5 +107,5 @@ words = {
         "helsinki",
         "copenhagen",
         "warsaw",
-    ]
+    ],
 }

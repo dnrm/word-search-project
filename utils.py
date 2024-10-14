@@ -6,6 +6,7 @@ end_color = "\033[0m"
 def random_color_highlight():
     return f"\033[{random.randint(101, 105)}m"
 
+
 def random_color():
     return f"\033[{random.randint(91, 96)}m"
 
