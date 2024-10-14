@@ -71,12 +71,14 @@ def main():
         coords = coords.split(",")
         print("coords", coords)
 
+        # * If the word is not in the list of words, ask the user to try again
         while guess not in words:
             print(f"\033[91m❌ Try again.{end_color}")
             guess = input("Enter the word you found: ").lower()
 
         for i in words_in_board:
             if i["word"] == guess:
+                # * Check if coordinates are the same
                 if coords[0] == str(i["coord"][0]) and coords[1] == str(i["coord"][1]):
                     print(f"\033[92m✅ {guess} found at {i['coord']}\033[0m")
                     time.sleep(0.75)
@@ -98,10 +100,9 @@ def main():
 
     print("\033[92m🎉🎉🎉 Congratulations! You found all the words! 🎉🎉🎉\033[0m")
     print(
-        "You took \033[96m{:.2f}\033[0m seconds to complete the game".format(
-            time_taken
-        )
+        "You took \033[96m{:.2f}\033[0m seconds to complete the game".format(time_taken)
     )
+
 
 if __name__ == "__main__":
     main()

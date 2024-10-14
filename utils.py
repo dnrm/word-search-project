@@ -2,13 +2,31 @@ import random
 
 end_color = "\033[0m"
 
+"""
+@random_color_highlight
+Returns a random color code for highlighting text
+"""
+
 
 def random_color_highlight():
     return f"\033[{random.randint(101, 105)}m"
 
 
+"""
+@random_color
+Returns a random color code for text
+"""
+
+
 def random_color():
     return f"\033[{random.randint(91, 96)}m"
+
+
+"""
+@prompt_wordlist
+Prompts the user to select a wordlist and returns the selection
+It has validation so that the user can only select a number between 1 and 5
+"""
 
 
 def prompt_wordlist():
@@ -33,6 +51,12 @@ def prompt_wordlist():
     return wordlist_selection
 
 
+"""
+@print_board
+Prints the board with the corresponding indexes and in a nice format.
+"""
+
+
 def print_board(board):
     print("  ", end=" ")
     for i in range(len(board)):
@@ -47,6 +71,13 @@ def print_board(board):
         index += 1
 
 
+"""
+@fits_horizontally
+Checks if a word fits horizontally in the board by checking if the word is
+not longer than the board and if the spaces are empty.
+"""
+
+
 def fits_horizontally(board, word, coord):
     if coord[1] + len(word) <= len(board):
         for j in range(len(word)):
@@ -54,6 +85,13 @@ def fits_horizontally(board, word, coord):
                 return False
         return True
     return False
+
+
+"""
+@fits_vertically
+Checks if a word fits vertically in the board by checking if the word is
+not longer than the board and if the spaces are empty.
+"""
 
 
 def fits_vertically(board, word, coord):
@@ -65,12 +103,33 @@ def fits_vertically(board, word, coord):
     return False
 
 
+"""
+@random_coordinate
+Returns a random coordinate based on the dimensions of the board
+"""
+
+
 def random_coordinate(dimensions):
     return (random.randint(0, dimensions - 1), random.randint(0, dimensions - 1))
 
 
+"""
+@random_word
+Returns a random word from the list of words
+"""
+
+
 def random_word(words):
     return words[random.randint(0, len(words) - 1)]
+
+
+"""
+@fill_board_with_words
+Fills the board with words from the list of words by selecting a random word,
+checking if it fits in the board, and then placing it in the board.
+
+The direction is randomly assigned, 0 for horizontal and 1 for vertical.
+"""
 
 
 def fill_board_with_words(board, words):
@@ -121,6 +180,13 @@ def fill_board_with_words(board, words):
     return board, words_in_board
 
 
+"""
+@fill_remaining_spaces
+Fills the remaining spaces in the board with random lowercase letters by
+checking if the space is empty.
+"""
+
+
 def fill_remainig_spaces(board):
     for i in range(len(board)):
         for j in range(len(board)):
@@ -128,6 +194,14 @@ def fill_remainig_spaces(board):
                 # * Fill with lowercase letters
                 board[i][j] = chr(random.randint(97, 122))
     return board
+
+
+"""
+@mark_in_board
+Marks the word in the board with a random color by checking the direction
+and then highlighting the word in the board by appending the color codes
+necessary.
+"""
 
 
 def mark_in_board(word, coordinate, direction, board):
