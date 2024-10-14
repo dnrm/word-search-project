@@ -1,8 +1,6 @@
 # Written by Daniel Medina
 # Date: 2024-10-11
 
-# ? Possible additions: Include a GUI for the game
-
 import os
 import word_list
 from utils import (
