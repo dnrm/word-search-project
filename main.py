@@ -103,5 +103,25 @@ def main():
         )
     )
 
+    file = open('results.txt', 'a+')
+    scores = []
+
+    # read all lines
+    for line in file:
+        scores.append(line)
+
+    # add new score
+    scores.append("{:.2f}".format(time.time() - start_time))
+
+    # sort scores
+    scores.sort()
+
+    if scores[0] == "{:.2f}".format(time.time() - start_time):
+        print("\033[92m🎉🎉🎉 New high score! 🎉🎉🎉\033[0m")
+
+    for score in scores:
+        file.write(score + "\n")
+    file.close()
+
 if __name__ == "__main__":
     main()
