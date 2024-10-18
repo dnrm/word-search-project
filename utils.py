@@ -25,7 +25,7 @@ def random_color():
 """
 @prompt_wordlist
 Prompts the user to select a wordlist and returns the selection
-It has validation so that the user can only select a number between 1 and 5
+It has validation so that the user can only select a number between 1 and 6
 """
 
 
@@ -36,13 +36,14 @@ def prompt_wordlist():
     print(f"\033[92m3. Animals{end_color}")
     print(f"\033[92m4. Tec de Monterrey Edition{end_color}")
     print(f"\033[92m5. Cities Around the World{end_color}")
+    print(f"\033[92m6. Car Brands{end_color}")
 
     wordlist_selection = 0
     wordlist_selection = input(
         "Enter the number of the wordlist you would like to use (default 1): "
     )
 
-    while wordlist_selection < "1" or wordlist_selection > "5":
+    while wordlist_selection < "1" or wordlist_selection > "6":
         print(f"\033[91m❌ Invalid option{end_color}")
         wordlist_selection = input(
             "Enter the number of the wordlist you would like to use (default 1): "

@@ -67,7 +67,6 @@ def main():
 
         # * Splits coordinates into X and Y
         coords = coords.split(",")
-        print("coords", coords)
 
         # * If the word is not in the list of words, ask the user to try again
         while guess not in words:
