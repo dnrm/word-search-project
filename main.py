@@ -65,7 +65,7 @@ def main():
             "Enter the position of the first letter (example: 1,2): "
         ).lower()
 
-        # TODO Missing to validate that coords are the correct value
+        # * Splits coordinates into X and Y
         coords = coords.split(",")
         print("coords", coords)
 
